@@ -69,7 +69,7 @@ const PROJECTS = [
     label: "iOS App",
     desc: "Kids' AR app, scan everyday objects and they come alive to chat and teach. See it, know it, love it.",
     tags: ["iOS", "Swift", "AR"],
-    href: "https://portfolio-updated-one-gules.vercel.app/",
+    href: "https://apps.apple.com/id/app/kida/id6788231771",
     img: "assets/images/kida.jpg?v=2",
     alt: "KIDA iOS app — scan, AR chat, and collection screens",
     featured: true,

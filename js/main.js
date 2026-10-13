@@ -6,6 +6,16 @@ document.documentElement.classList.add("js");
   if (!l) return;
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) { l.remove(); return; }
 
+  /* play the intro once per browser tab session: coming back to the home page from
+     another page (e.g. "Back to home" on projects.html) skips it. a hard reload plays it again. */
+  let seen = false;
+  try {
+    const nav = performance.getEntriesByType("navigation")[0];
+    seen = sessionStorage.getItem("introSeen") === "1" && !(nav && nav.type === "reload");
+    sessionStorage.setItem("introSeen", "1");
+  } catch (e) {}
+  if (seen) { l.remove(); return; }
+
   document.body.classList.add("loading");
   const txt = l.querySelector(".loader__text");
   txt.innerHTML = txt.textContent
@@ -103,6 +113,52 @@ if (yParam) {
   addEventListener("scroll", () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); }, { passive: true });
   addEventListener("resize", update);
   update();
+})();
+
+/* ============ REMEMBER WHERE YOU LEFT THE HOME PAGE ============ */
+/* clicking "View all projects" stores the scroll position; "Back to home" on
+   projects.html sets a flag, and the home page then jumps back to that spot instead of the top. */
+(function homeScrollMemory() {
+  const more = document.querySelector(".proj-more a");
+  if (more) {
+    more.addEventListener("click", () => {
+      try { sessionStorage.setItem("homeScroll", String(Math.round(scrollY))); } catch (e) {}
+    });
+  }
+
+  const back = document.querySelector(".back-link");
+  if (back) {
+    back.addEventListener("click", (e) => {
+      let y = null;
+      try { y = sessionStorage.getItem("homeScroll"); } catch (err) {}
+      if (y) {
+        try { sessionStorage.setItem("restoreHome", "1"); } catch (err) {}
+      } else {
+        // opened projects.html directly: send them to the projects section instead of the top
+        e.preventDefault();
+        location.href = "index.html#projects";
+      }
+    });
+  }
+
+  // home page, arriving from "Back to home"
+  let target = null;
+  try {
+    if (sessionStorage.getItem("restoreHome") === "1") {
+      target = parseFloat(sessionStorage.getItem("homeScroll"));
+      sessionStorage.removeItem("restoreHome");
+    }
+  } catch (e) {}
+  if (target == null || isNaN(target) || !document.querySelector(".hero")) return;
+
+  const jump = () => scrollTo({ top: target, behavior: "instant" });
+  let touched = false;
+  ["wheel", "touchstart", "keydown", "mousedown"].forEach((ev) =>
+    addEventListener(ev, () => { touched = true; }, { once: true, passive: true })
+  );
+  jump();
+  // layout can shift while images/fonts settle: re-apply once on load unless the user already moved
+  addEventListener("load", () => { if (!touched) jump(); });
 })();
 
 /* ============ MOBILE MENU ============ */
