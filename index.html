@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,8 +14,12 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=29" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600;700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=63" />
+  <script>
+    /* apply the saved theme before first paint so there is no dark -> light flash */
+    try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
 </head>
 <body>
 
@@ -30,51 +34,77 @@
   <header class="nav">
     <a class="nav__logo" href="#home">Imelda<span class="accent">.</span></a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="#about">About</a>
+      <a href="#home">Home</a>
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
-      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <!-- <a href="#services">Services</a> -->
       <a href="#contact">Contact</a>
     </nav>
-    <a class="btn" href="mailto:imeldadamayantik@gmail.com">Get in touch</a>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+      </button>
+      <a class="btn" href="mailto:imeldadamayantik@gmail.com">Get in touch</a>
+    </div>
     <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span>
     </button>
   </header>
 
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="#about">About</a>
+    <a href="#home">Home</a>
     <a href="#projects">Projects</a>
     <a href="#experience">Experience</a>
-    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <!-- <a href="#services">Services</a> -->
     <a href="#contact">Contact</a>
     <a class="btn mobile-menu__btn" href="mailto:imeldadamayantik@gmail.com">Get in touch</a>
   </nav>
 
   <main id="home">
 
-    <!-- ======= HERO (centered) ======= -->
-    <section class="hero hero--centered card-surface">
-      <span class="hero__sparkle hero__sparkle--1" aria-hidden="true">✦</span>
-      <span class="hero__sparkle hero__sparkle--2" aria-hidden="true">✧</span>
-      <span class="hero__sparkle hero__sparkle--4" aria-hidden="true">✦</span>
-      <span class="hero__sparkle hero__sparkle--3" aria-hidden="true">✧</span>
-
+    <!-- ======= HERO (split: text + portrait with status card) ======= -->
+    <section class="hero hero--split">
       <div class="hero__text">
-        <!-- <span class="hero__badge reveal">
-          <span class="dot" aria-hidden="true"></span>
-          Available for work — I reply fast.
-        </span> -->
-       
-        <p class="hero__role reveal"><em>Developer &amp; AI Enthusiast</em></p>
-        <h1 class="reveal">I'm Imelda</h1>
-        <p class="reveal">
-         A passionate web and app developer focused on building modern, scalable, and reliable products. I care about shipping high quality, responsive apps and collaborating well with the people I build with.
+        <p class="hero__eyebrow reveal"><span class="dot" aria-hidden="true"></span>Open to work</p>
+        <h1 class="reveal">
+          <span class="hero__line">Hi, I'm <em>Imelda</em></span>
+          <span class="hero__line">I build iOS apps</span>
+          <span class="hero__line">and web products</span>
+          <span class="hero__line"><em>end to end.</em></span>
+        </h1>
+        <p class="hero__lead reveal">
+          Software engineer working in Swift, Go and full-stack web, from user research to a shipped app.
         </p>
         <div class="hero__actions reveal">
-          <a class="btn" href="#projects">View projects</a>
+          <a class="btn" href="#projects">View my work
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg>
+          </a>
           <a class="btn btn--ghost" href="assets/CV_ImeldaDamayanti.pdf" target="_blank" rel="noopener">Download CV</a>
         </div>
+      </div>
+
+      <div class="hero__visual reveal">
+        <div class="hero__photo">
+          <img src="assets/photo.png" alt="Portrait of Imelda Damayanti" width="427" height="585" />
+        </div>
+        <aside class="hero__status" aria-label="Availability">
+          <p class="hero__status-tag"><span class="dot" aria-hidden="true"></span>Available</p>
+          <p class="hero__status-title">Open to new roles</p>
+          <ul class="hero__status-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18" /><path d="M12 3a14 14 0 0 0 0 18" /></svg>
+              Based in Indonesia
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+              <a href="mailto:imeldadamayantik@gmail.com">imeldadamayantik@gmail.com</a>
+            </li>
+          </ul>
+          <p class="hero__signature" aria-hidden="true">Imelda</p>
+        </aside>
       </div>
     </section>
 
@@ -87,7 +117,7 @@
     </div> -->
 
     <!-- ======= BENEFITS ======= -->
-    <section class="section" id="about">
+    <section class="section" id="why-me" hidden>
       <p class="label reveal">Why me</p>
       <h2 class="reveal">Discover what I <em>bring</em></h2>
       <p class="section__sub reveal">
@@ -113,75 +143,110 @@
       </div>
     </section>
 
+    <!-- ======= WORKS (stacking cards: each pins, the next slides over it) ======= -->
+    <section class="works" id="works" hidden>
+      <div class="works__head">
+        <div>
+          <p class="works__eyebrow reveal">Works</p>
+          <h2 class="reveal">Products I've <em>built</em></h2>
+        </div>
+        <p class="works__desc reveal">
+          iOS apps, web platforms, and interfaces, each taken from user research to something people can open and use.
+        </p>
+      </div>
+      <div class="works__stack">
+        <article class="work" style="--i:0">
+          <div class="work__body">
+            <p class="work__index">01 / 06</p>
+            <div>
+              <h3 class="work__title">Stocarbon</h3>
+              <p class="work__cat">Website</p>
+              <p class="work__desc">First crowd platform for carbon stock in Indonesia, connecting landowners with companies offsetting emissions.</p>
+              <ul class="work__tags" aria-label="Tags"><li>Web</li><li>Landing Page</li></ul>
+            </div>
+            <a class="work__link" href="https://stocarbon-landing.vercel.app/" target="_blank" rel="noopener">View project <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <a class="work__media" href="https://stocarbon-landing.vercel.app/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/images/stocarbon.jpg" alt="" loading="lazy" /></a>
+        </article>
+        <article class="work work--light" style="--i:1">
+          <div class="work__body">
+            <p class="work__index">02 / 06</p>
+            <div>
+              <h3 class="work__title">Budget-in Aja</h3>
+              <p class="work__cat">Website</p>
+              <p class="work__desc">A web app that helps students plan budget-friendly meals for the week.</p>
+              <ul class="work__tags" aria-label="Tags"><li>Golang</li><li>MySQL</li><li>HTML</li><li>CSS</li><li>JS</li></ul>
+            </div>
+            <a class="work__link" href="https://budget-in-aja.vercel.app/" target="_blank" rel="noopener">View project <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <a class="work__media" href="https://budget-in-aja.vercel.app/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/images/budgetin.jpg" alt="" loading="lazy" /></a>
+        </article>
+        <article class="work" style="--i:2">
+          <div class="work__body">
+            <p class="work__index">03 / 06</p>
+            <div>
+              <h3 class="work__title">Waveline</h3>
+              <p class="work__cat">Website</p>
+              <p class="work__desc">IoT-powered web platform for early stroke detection.</p>
+              <ul class="work__tags" aria-label="Tags"><li>Web</li><li>IoT</li></ul>
+            </div>
+            <a class="work__link" href="https://wavelineaja.vercel.app/" target="_blank" rel="noopener">View project <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <a class="work__media" href="https://wavelineaja.vercel.app/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/images/waveline.jpg" alt="" loading="lazy" /></a>
+        </article>
+        <article class="work work--light" style="--i:3">
+          <div class="work__body">
+            <p class="work__index">04 / 06</p>
+            <div>
+              <h3 class="work__title">ttery</h3>
+              <p class="work__cat">iOS App</p>
+              <p class="work__desc">Playful iOS energy tracker, spend your daily battery on tasks, recharge with rest. Live on TestFlight.</p>
+              <ul class="work__tags" aria-label="Tags"><li>iOS</li><li>Swift</li><li>TestFlight</li></ul>
+            </div>
+            <a class="work__link" href="https://testflight.apple.com/join/XCR6herP" target="_blank" rel="noopener">View project <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <a class="work__media" href="https://testflight.apple.com/join/XCR6herP" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/images/ttery.jpg" alt="" loading="lazy" /></a>
+        </article>
+        <article class="work" style="--i:4">
+          <div class="work__body">
+            <p class="work__index">05 / 06</p>
+            <div>
+              <h3 class="work__title">StitchTab</h3>
+              <p class="work__cat">UI Design</p>
+              <p class="work__desc">Crochet companion, learn stitches, browse patterns, and follow them row by row.</p>
+              <ul class="work__tags" aria-label="Tags"><li>iOS</li><li>Swift</li></ul>
+            </div>
+            <a class="work__link" href="https://github.com/imeldamayanti" target="_blank" rel="noopener">View project <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <a class="work__media" href="https://github.com/imeldamayanti" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/images/stitchtab.jpg" alt="" loading="lazy" /></a>
+        </article>
+        <article class="work work--light" style="--i:5">
+          <div class="work__body">
+            <p class="work__index">06 / 06</p>
+            <div>
+              <h3 class="work__title">KIDA</h3>
+              <p class="work__cat">iOS App</p>
+              <p class="work__desc">Kids' AR app, scan everyday objects and they come alive to chat and teach. See it, know it, love it.</p>
+              <ul class="work__tags" aria-label="Tags"><li>iOS</li><li>Swift</li><li>AR</li></ul>
+            </div>
+            <a class="work__link" href="https://portfolio-updated-one-gules.vercel.app/" target="_blank" rel="noopener">View project <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <a class="work__media" href="https://portfolio-updated-one-gules.vercel.app/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/images/kida.jpg?v=2" alt="" loading="lazy" /></a>
+        </article>
+      </div>
+    </section>
+
     <!-- ======= PROJECTS ======= -->
     <section class="section" id="projects">
-      <p class="label reveal">Selected work</p>
+      <!-- <p class="label reveal">Selected work</p> -->
       <h2 class="reveal">Projects with <em>clarity</em></h2>
       <p class="section__sub reveal">
         A curated collection of web, AI, and design work.
       </p>
-      <div class="grid-2">
-        <article class="proj proj--card reveal">
-          <a class="proj__media" href="https://stocarbon-landing.vercel.app/" target="_blank" rel="noopener"><img src="assets/images/stocarbon.jpg" alt="Stocarbon landing page" loading="lazy" /><span class="proj__title-hover">Stocarbon</span><span class="proj__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></span></a>
-          <div class="proj__body">
-            <div class="proj__meta"><h3>Stocarbon</h3><span class="label">Website</span></div>
-            <p class="proj__desc">First crowd platform for carbon stock in Indonesia, connecting landowners with companies offsetting emissions.</p>
-            <ul class="proj__stack" aria-label="Tags">
-              <li>Web</li><li>Landing Page</li>
-            </ul>
-          </div>
-        </article>
-        <article class="proj proj--card reveal">
-          <a class="proj__media" href="https://budget-in-aja.vercel.app/" target="_blank" rel="noopener"><img src="assets/images/budgetin.jpg" alt="Budget-in Aja homepage" loading="lazy" /><span class="proj__title-hover">Budget-in Aja</span><span class="proj__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></span></a>
-          <div class="proj__body">
-            <div class="proj__meta"><h3>Budget-in Aja</h3><span class="label">Website</span></div>
-            <p class="proj__desc">A web app that helps students plan budget-friendly meals for the week.</p>
-            <ul class="proj__stack" aria-label="Tags">
-              <li>Golang</li><li>MySQL</li><li>HTML</li><li>CSS</li><li>JS</li>
-            </ul>
-          </div>
-        </article>
-        <article class="proj proj--card reveal">
-          <a class="proj__media" href="https://wavelineaja.vercel.app/" target="_blank" rel="noopener"><img src="assets/images/waveline.jpg" alt="Waveline stroke-detection website" loading="lazy" /><span class="proj__title-hover">Waveline</span><span class="proj__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></span></a>
-          <div class="proj__body">
-            <div class="proj__meta"><h3>Waveline</h3><span class="label">Website</span></div>
-            <p class="proj__desc">IoT-powered web platform for early stroke detection.</p>
-            <ul class="proj__stack" aria-label="Tags">
-              <li>Web</li><li>IoT</li>
-            </ul>
-          </div>
-        </article>
-        <article class="proj proj--card reveal">
-          <a class="proj__media" href="https://testflight.apple.com/join/XCR6herP" target="_blank" rel="noopener"><img src="assets/images/ttery.jpg" alt="ttery iOS app — settings, logo, and pick-a-task screens" loading="lazy" /><span class="proj__title-hover">ttery</span><span class="proj__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></span></a>
-          <div class="proj__body">
-            <div class="proj__meta"><h3>ttery</h3><span class="label">iOS App</span></div>
-            <p class="proj__desc">Playful iOS energy tracker, spend your daily battery on tasks, recharge with rest. Live on TestFlight.</p>
-            <ul class="proj__stack" aria-label="Tags">
-              <li>iOS</li><li>Swift</li><li>TestFlight</li>
-            </ul>
-          </div>
-        </article>
-        <article class="proj proj--card reveal">
-          <a class="proj__media" href="https://github.com/imeldamayanti" target="_blank" rel="noopener"><img src="assets/images/stitchtab.jpg" alt="StitchTab iOS app — explore patterns, stitch library, and pattern steps" loading="lazy" /><span class="proj__title-hover">StitchTab</span><span class="proj__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></span></a>
-          <div class="proj__body">
-            <div class="proj__meta"><h3>StitchTab</h3><span class="label">UI Design</span></div>
-            <p class="proj__desc">Crochet companion, learn stitches, browse patterns, and follow them row by row.</p>
-            <ul class="proj__stack" aria-label="Tags">
-              <li>iOS</li><li>Swift</li>
-            </ul>
-          </div>
-        </article>
-        <article class="proj proj--card reveal">
-          <a class="proj__media" href="https://portfolio-updated-one-gules.vercel.app/" target="_blank" rel="noopener"><img src="assets/images/kida.jpg?v=2" alt="KIDA iOS app — scan, AR chat, and collection screens" loading="lazy" /><span class="proj__title-hover">KIDA</span><span class="proj__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></span></a>
-          <div class="proj__body">
-            <div class="proj__meta"><h3>KIDA</h3><span class="label">iOS App</span></div>
-            <p class="proj__desc">Kids' AR app, scan everyday objects and they come alive to chat and teach. See it, know it, love it.</p>
-            <ul class="proj__stack" aria-label="Tags">
-              <li>iOS</li><li>Swift</li><li>AR</li>
-            </ul>
-          </div>
-        </article>
-       
+      <div class="grid-2" id="projectGrid" data-projects="featured"></div>
+      <noscript><p class="section__sub">Enable JavaScript to see the projects, or visit <a href="https://github.com/imeldamayanti" rel="noopener">my GitHub</a>.</p></noscript>
+      <div class="proj-more">
+        <a class="btn btn--ghost" href="projects.html">View all projects</a>
       </div>
     </section>
 
@@ -246,8 +311,115 @@
       </ol>
     </section>
 
+    <!-- ======= ABOUT (portrait + bio + proof numbers) ======= -->
+    <section class="about" id="about">
+      <figure class="about__figure reveal">
+        <div class="about__photo">
+          <img src="assets/images/portrait.jpg" alt="Portrait of Imelda Damayanti" width="876" height="1200" loading="lazy" />
+          <ul class="about__social" aria-label="Social links">
+            <li><a href="https://www.linkedin.com/in/imeldadamayanti/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg></a></li>
+            <li><a href="https://github.com/imeldamayanti" target="_blank" rel="noopener" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg></a></li>
+            <li><a href="https://www.instagram.com/imelda_d_/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg></a></li>
+          </ul>
+        </div>
+        <figcaption>
+          <strong>Imelda Damayanti</strong>
+          <span>Software Engineer · Apple Developer Academy Bali</span>
+        </figcaption>
+      </figure>
+      <div class="about__text">
+        <!-- <p class="about__eyebrow reveal">About Imelda</p> -->
+        <h2 class="reveal">From user research to a <em>shipped app.</em></h2>
+        <span class="about__rule reveal" aria-hidden="true"></span>
+        <p class="about__bio reveal">
+          I build products end to end. At Apple Developer Academy Bali I've designed and built 4+ iOS apps in Swift, including leading KIDA from concept to product in a 2-week sprint. Before that I shipped an internal HR web app for 700+ employees and co-authored published computer-vision research.
+        </p>
+        <ul class="about__stats reveal" aria-label="Highlights">
+          <li><span class="about__num">4+</span><span class="about__label">iOS apps built</span></li>
+          <li><span class="about__num">700+</span><span class="about__label">Users of the HR web app</span></li>
+          <li><span class="about__num">0.93</span><span class="about__label">mAP, YOLOv11 (IEEE)</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======= ENGINEERING TOOLKIT ======= -->
+    <section class="toolkit" id="toolkit" hidden>
+      <div class="toolkit__main">
+        <h2 class="reveal">Engineering <em>Toolkit</em></h2>
+        <p class="toolkit__sub reveal">My tech stack</p>
+        <ul class="toolkit__grid" aria-label="Tech stack">
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/swift/swift-original.svg" alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">Swift</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/go/go-original.svg" alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">Go</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">Python</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">JavaScript</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/php/php-original.svg" data-dim alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">PHP</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/mysql/mysql-original.svg" data-dim alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">MySQL</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/cplusplus/cplusplus-original.svg" alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">C++</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/wordpress/wordpress-plain.svg" data-dim alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">WordPress</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/figma/figma-original.svg" alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">Figma</span>
+            </li>
+            <li class="tool reveal">
+              <span class="tool__icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" alt="" width="36" height="36" loading="lazy" /></span>
+              <span class="tool__name">Git</span>
+            </li>
+        </ul>
+      </div>
+      <ul class="toolkit__caps" aria-label="What I work on">
+          <li class="reveal">
+            <span class="cap__glyph" aria-hidden="true">{ }</span>
+            <span class="cap__text"><span class="cap__title">Full-stack web</span><span class="cap__sub">Go, PHP, MySQL, JavaScript</span></span>
+          </li>
+          <li class="reveal">
+            <span class="cap__glyph" aria-hidden="true">⌘</span>
+            <span class="cap__text"><span class="cap__title">iOS development</span><span class="cap__sub">Swift, SwiftUI, Core ML</span></span>
+          </li>
+          <li class="reveal">
+            <span class="cap__glyph" aria-hidden="true">◎</span>
+            <span class="cap__text"><span class="cap__title">Computer vision & ML</span><span class="cap__sub">YOLOv11, Create ML</span></span>
+          </li>
+          <li class="reveal">
+            <span class="cap__glyph" aria-hidden="true">◮</span>
+            <span class="cap__text"><span class="cap__title">Databases & SQL</span><span class="cap__sub">Query design, data validation</span></span>
+          </li>
+          <li class="reveal">
+            <span class="cap__glyph" aria-hidden="true">✦</span>
+            <span class="cap__text"><span class="cap__title">UI/UX design</span><span class="cap__sub">Figma, prototyping</span></span>
+          </li>
+          <li class="reveal">
+            <span class="cap__glyph" aria-hidden="true">▣</span>
+            <span class="cap__text"><span class="cap__title">AI-assisted development</span><span class="cap__sub">Claude Code, Codex</span></span>
+          </li>
+      </ul>
+    </section>
+
     <!-- ======= SERVICES ======= -->
-    <section class="section" id="services">
+    <section class="section" id="services" hidden>
       <p class="label reveal">Services</p>
       <h2 class="reveal">What I <em>do</em></h2>
       <p class="section__sub reveal">
@@ -308,7 +480,7 @@
     </section> -->
 
     <!-- ======= CONTACT ======= -->
-    <section class="section section--cta card-surface" id="contact">
+    <section class="section section--cta card-surface" id="contact-card" hidden>
       <h2 class="reveal">Let's work <em>together</em></h2>
       <p class="section__sub reveal">
         Have a question, a role, or want to chat about tech, AI & design,
@@ -322,7 +494,7 @@
 
   </main>
 
-  <footer class="footer">
+  <footer class="footer" hidden>
     <span class="label">© 2026 Imelda Damayanti</span>
     <nav class="footer__links" aria-label="Social">
       <a href="https://www.linkedin.com/in/imeldadamayanti/" target="_blank" rel="noopener">LinkedIn</a>
@@ -332,6 +504,49 @@
     <a class="label" href="#home">Back to top ↑</a>
   </footer>
 
-  <script src="js/main.js?v=22"></script>
+  <footer class="site-footer" id="contact">
+    <div class="site-footer__inner">
+      <h2 class="site-footer__title">
+        <span class="sr-only">Let's build something incredible together.</span>
+        <span aria-hidden="true">
+          Let's <span class="rotor"><span class="rotor__word is-on">build</span><span class="rotor__word">design</span><span class="rotor__word">ship</span><span class="rotor__word">create</span></span>
+          <span class="site-footer__title-muted">incredible work together.</span>
+        </span>
+      </h2>
+
+      <div class="site-footer__contact">
+        <div>
+          <p class="site-footer__label">Email</p>
+          <a class="site-footer__email" href="mailto:imeldadamayantik@gmail.com">imeldadamayantik@gmail.com</a>
+        </div>
+        <div class="site-footer__socials">
+          <p class="site-footer__label">Socials</p>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/imeldadamayanti/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg></a></li>
+            <li><a href="https://github.com/imeldamayanti" target="_blank" rel="noopener" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg></a></li>
+            <li><a href="https://www.instagram.com/imelda_d_/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer">
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a href="assets/CV_ImeldaDamayanti.pdf" target="_blank" rel="noopener">Download CV</a>
+      </nav>
+
+      <div class="site-footer__meta">
+        <p>Based in <span>Indonesia</span></p>
+        <p>© 2026 Imelda Damayanti</p>
+      </div>
+    </div>
+    <p class="site-footer__mark" aria-hidden="true">Imelda Damayanti</p>
+  </footer>
+
+
+  <script src="js/projects.js?v=1"></script>
+  <script src="js/main.js?v=26"></script>
 </body>
 </html>

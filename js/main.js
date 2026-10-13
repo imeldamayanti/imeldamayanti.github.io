@@ -51,6 +51,60 @@ if (yParam) {
   update();
 })();
 
+/* ============ THEME TOGGLE ============ */
+/* dark is the default; the choice is remembered. the saved theme is applied by a
+   tiny inline script in <head> so the page never flashes the wrong colors. */
+(function themeToggle() {
+  const btn = document.getElementById("themeToggle");
+  if (!btn) return;
+  const root = document.documentElement;
+  const sync = () => {
+    const light = root.dataset.theme === "light";
+    btn.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+  };
+  sync();
+  btn.addEventListener("click", () => {
+    const next = root.dataset.theme === "light" ? "dark" : "light";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    sync();
+  });
+})();
+
+/* ============ FOOTER HEADLINE WORD ============ */
+/* cycles the highlighted word; with reduced motion it just stays on the first one */
+(function rotor() {
+  const words = [...document.querySelectorAll(".rotor__word")];
+  if (words.length < 2 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let i = 0;
+  setInterval(() => {
+    words[i].classList.remove("is-on");
+    i = (i + 1) % words.length;
+    words[i].classList.add("is-on");
+  }, 2400);
+})();
+
+/* ============ NAV: dot under the current section ============ */
+(function navSpy() {
+  const links = [...document.querySelectorAll(".nav__links a[href^='#']")];
+  if (!links.length) return;
+  const targets = links
+    .map((a) => ({ a, el: a.getAttribute("href") === "#home" ? document.querySelector(".hero") : document.querySelector(a.getAttribute("href")) }))
+    .filter((t) => t.el);
+  let ticking = false;
+  function update() {
+    const line = innerHeight * 0.35;
+    let current = targets[0];
+    for (const t of targets) if (t.el.getBoundingClientRect().top <= line) current = t;
+    // at the very bottom the last link (Contact) should win
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) current = targets[targets.length - 1];
+    links.forEach((a) => a.classList.toggle("is-active", a === current.a));
+  }
+  addEventListener("scroll", () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); }, { passive: true });
+  addEventListener("resize", update);
+  update();
+})();
+
 /* ============ MOBILE MENU ============ */
 const burger = document.getElementById("burger");
 const mobileMenu = document.getElementById("mobileMenu");
@@ -80,6 +134,50 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.15 }
 );
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+/* ============ PROJECT FILTERS ============ */
+/* pills are built from the cards' data-category, so a category with no
+   projects never shows (add an `ai` card and its pill appears on its own) */
+(function projectFilters() {
+  const bar = document.getElementById("projectFilters");
+  const cards = [...document.querySelectorAll("#projectGrid .proj")];
+  if (!bar || !cards.length) return;
+
+  const LABELS = { web: "Web", mobile: "Mobile", ai: "AI" };
+  const present = Object.keys(LABELS).filter((k) =>
+    cards.some((c) => c.dataset.category === k)
+  );
+  if (present.length < 2) { bar.remove(); return; }
+
+  const options = [["all", "All", cards.length]].concat(
+    present.map((k) => [k, LABELS[k], cards.filter((c) => c.dataset.category === k).length])
+  );
+  bar.innerHTML = options
+    .map(([k, label, n]) =>
+      `<button type="button" class="filter" data-filter="${k}" aria-pressed="${k === "all"}">${label}<span class="filter__count">${n}</span></button>`
+    )
+    .join("");
+
+  bar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter");
+    if (!btn) return;
+    const key = btn.dataset.filter;
+    bar.querySelectorAll(".filter").forEach((b) =>
+      b.setAttribute("aria-pressed", String(b === btn))
+    );
+    for (const c of cards) {
+      const show = key === "all" || c.dataset.category === key;
+      c.hidden = !show;
+      c.classList.remove("proj--in");
+      if (show) {
+        c.classList.add("is-visible");
+        revealObserver.unobserve(c);
+        void c.offsetWidth; // restart the animation
+        c.classList.add("proj--in");
+      }
+    }
+  });
+})();
 
 /* ============ TIMELINE PROGRESS ============ */
 /* line fills and nodes light up as they pass mid-viewport */
