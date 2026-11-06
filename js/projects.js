@@ -9,6 +9,50 @@ const FEATURED_MAX = 6;
 
 const PROJECTS = [
   {
+    title: "Hisplora",
+    category: "mobile",   // web | mobile | ai
+    label: "iOS App",
+    desc: "Story-driven heritage explorer, follow quests across Badung's historic sites and keep your journey as a postcard.",
+    tags: ["iOS", "UI Design"],
+    href: "https://testflight.apple.com/join/n1kpqE91",
+    img: "assets/images/hisplora.jpg",
+    alt: "Hisplora iOS app — quest map, story intro, and journey postcard screens",
+    featured: true,
+  },
+  {
+    title: "KIDA",
+    category: "mobile",   // web | mobile | ai
+    label: "iOS App",
+    desc: "Kids' AR app, scan everyday objects and they come alive to chat and teach. See it, know it, love it.",
+    tags: ["iOS", "Swift", "AR"],
+    href: "https://apps.apple.com/id/app/kida/id6788231771",
+    img: "assets/images/kida.jpg?v=2",
+    alt: "KIDA iOS app — scan, AR chat, and collection screens",
+    featured: true,
+  },
+  {
+    title: "StitchTab",
+    category: "mobile",   // web | mobile | ai
+    label: "UI Design",
+    desc: "Crochet companion, learn stitches, browse patterns, and follow them row by row.",
+    tags: ["iOS", "Swift"],
+    href: "stitchtab.html",   // detail page, opens in a new tab
+    img: "assets/images/stitchtab.jpg",
+    alt: "StitchTab iOS app — explore patterns, stitch library, and pattern steps",
+    featured: true,
+  },
+  {
+    title: "ttery",
+    category: "mobile",   // web | mobile | ai
+    label: "iOS App",
+    desc: "Playful iOS energy tracker, spend your daily battery on tasks, recharge with rest. Live on the App Store.",
+    tags: ["iOS", "Swift", "App Store"],
+    href: "https://apps.apple.com/id/app/ttery/id6776476060",
+    img: "assets/images/ttery.jpg",
+    alt: "ttery iOS app — settings, logo, and pick-a-task screens",
+    featured: true,
+  },
+  {
     title: "Stocarbon",
     category: "web",   // web | mobile | ai
     label: "Website",
@@ -17,17 +61,6 @@ const PROJECTS = [
     href: "https://stocarbon-landing.vercel.app/",
     img: "assets/images/stocarbon.jpg",
     alt: "Stocarbon landing page",
-    featured: true,
-  },
-  {
-    title: "Budget-in Aja",
-    category: "web",   // web | mobile | ai
-    label: "Website",
-    desc: "A web app that helps students plan budget-friendly meals for the week.",
-    tags: ["Golang", "MySQL", "HTML", "CSS", "JS"],
-    href: "https://budget-in-aja.vercel.app/",
-    img: "assets/images/budgetin.jpg",
-    alt: "Budget-in Aja homepage",
     featured: true,
   },
   {
@@ -42,37 +75,15 @@ const PROJECTS = [
     featured: true,
   },
   {
-    title: "ttery",
-    category: "mobile",   // web | mobile | ai
-    label: "iOS App",
-    desc: "Playful iOS energy tracker, spend your daily battery on tasks, recharge with rest. Live on TestFlight.",
-    tags: ["iOS", "Swift", "TestFlight"],
-    href: "https://testflight.apple.com/join/XCR6herP",
-    img: "assets/images/ttery.jpg",
-    alt: "ttery iOS app — settings, logo, and pick-a-task screens",
-    featured: true,
-  },
-  {
-    title: "StitchTab",
-    category: "mobile",   // web | mobile | ai
-    label: "UI Design",
-    desc: "Crochet companion, learn stitches, browse patterns, and follow them row by row.",
-    tags: ["iOS", "Swift"],
-    href: "https://github.com/imeldamayanti",
-    img: "assets/images/stitchtab.jpg",
-    alt: "StitchTab iOS app — explore patterns, stitch library, and pattern steps",
-    featured: true,
-  },
-  {
-    title: "KIDA",
-    category: "mobile",   // web | mobile | ai
-    label: "iOS App",
-    desc: "Kids' AR app, scan everyday objects and they come alive to chat and teach. See it, know it, love it.",
-    tags: ["iOS", "Swift", "AR"],
-    href: "https://apps.apple.com/id/app/kida/id6788231771",
-    img: "assets/images/kida.jpg?v=2",
-    alt: "KIDA iOS app — scan, AR chat, and collection screens",
-    featured: true,
+    title: "Budget-in Aja",
+    category: "web",   // web | mobile | ai
+    label: "Website",
+    desc: "A web app that helps students plan budget-friendly meals for the week.",
+    tags: ["Golang", "MySQL", "HTML", "CSS", "JS"],
+    href: "https://budget-in-aja.vercel.app/",
+    img: "assets/images/budgetin.jpg",
+    alt: "Budget-in Aja homepage",
+    featured: false,
   },
 ];
 
